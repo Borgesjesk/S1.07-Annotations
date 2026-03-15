@@ -19,4 +19,4 @@ Deep dive into Java annotations: built-in annotations like @Override and @Deprec
 - Maven 3.9.11
 
 ## 🚀 Installation
-`git clone `
+`git clone https://github.com/Borgesjesk/S1.07-Annotations.git`
