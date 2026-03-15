@@ -1,0 +1,30 @@
+package cat.itacademy.s1_07.n1.ex1;
+
+public class OnsiteWorker extends Worker {
+
+    private static double fuelAllowance = 50.0;
+
+    public OnsiteWorker(String name, String surname, double pricePerHour) {
+        super(name, surname, pricePerHour);
+    }
+
+    public static double getFuelAllowance() { return fuelAllowance; }
+    public static void setFuelAllowance(double fuelAllowance) {
+        OnsiteWorker.fuelAllowance = fuelAllowance;
+    }
+
+    @Override
+    public double calculateSalary(int hoursWorked) {
+        return super.calculateSalary(hoursWorked) + fuelAllowance;
+    }
+
+    @Deprecated
+    public double getBonus() {
+        return fuelAllowance;
+    }
+
+    @Override
+    public String toString() {
+        return "OnsiteWorker{" + super.toString() + ", fuelAllowance=€" + fuelAllowance + "}";
+    }
+}
