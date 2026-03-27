@@ -1,12 +1,11 @@
 package cat.itacademy.s1_07.n2.ex1;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.lang.reflect.Field;
 
 public class JsonSerializer {
+
+    private final JsonFileWriter fileWriter = new JsonFileWriter();
 
     public void serialize(Object object) {
         Class<?> clazz = object.getClass();
@@ -23,10 +22,10 @@ public class JsonSerializer {
                 + directory.replace("/", File.separator) + File.separator + fileName;
 
         String json = buildJson(object, clazz);
-        writeToFile(filePath, json);
+        fileWriter.write(filePath, json);
     }
 
-    private String buildJson(Object object, Class<?> clazz) {
+    String buildJson(Object object, Class<?> clazz) {
         StringBuilder json = new StringBuilder("{\n");
         Field[] fields = clazz.getDeclaredFields();
 
@@ -53,15 +52,4 @@ public class JsonSerializer {
         return json.toString();
     }
 
-    private void writeToFile(String filePath, String content) {
-        File outputFile = new File(filePath);
-        outputFile.getParentFile().mkdirs();
-
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {
-            writer.write(content);
-            System.out.println("JSON saved to: " + outputFile.getAbsolutePath());
-        } catch (IOException e) {
-            System.err.println("Error writing JSON file: " + e.getMessage());
-        }
-    }
 }
